@@ -3,7 +3,7 @@ import time
 import random
 import heapq
 from heapq import heappush
-from copy import deepcopy
+from copy import deepcopy, copy
 
 
 class TreeNode(object):
@@ -212,7 +212,7 @@ def heuristic_search(initial_state, goal_state, method='misplaced_tile'):
         # print('{}: {}'.format(total_step, [cur_arr[0:3], cur_arr[3:6], cur_arr[6:9]]))
         g_val = cur_g_val + 1
         for ops in full_operation:
-            res_arr = move(deepcopy(cur_arr), ops)
+            res_arr = move(copy(cur_arr), ops)
             if res_arr is None or str(res_arr) in repeated_hist:
                 continue
 
@@ -302,7 +302,7 @@ if __name__ == "__main__":
     beauty_print_puzzle(goal_state)
 
     # Verify that the initial puzzle has a solution, if not, exit program
-    valid_flag = is_valid_puzzle(deepcopy(initial_state), deepcopy(goal_state))
+    valid_flag = is_valid_puzzle(copy(initial_state), copy(goal_state))
     if not valid_flag:
         print('Invalid initial puzzle, no solution.')
         exit(0)
